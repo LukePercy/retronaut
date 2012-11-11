@@ -1,0 +1,8 @@
+.ui-collapsible-content {
+	border-left: 1px solid #f4c63f;
+	border-right: 1px solid #f4c63f;
+}
+
+	.ui-collapsible-content.ui-corner-bottom {
+		border-bottom: 1px solid #f4c63f;
+	}
