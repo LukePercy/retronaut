@@ -6,3 +6,52 @@
 	.ui-collapsible-content.ui-corner-bottom {
 		border-bottom: 1px solid #f4c63f;
 	}
+
+.ui-header h1 span.ui-icon {
+	display: inline-block;
+	background-color: transparent;
+	margin-top: -2px;
+	margin-bottom: -2px;
+}
+
+.ui-icon-scrumble-heart,
+.ui-icon-scrumble-thumbs-up,
+.ui-icon-scrumble-thumbs-down,
+.ui-icon-scrumble-book {
+	background-image: url("../../../themes/scrumble/img/icons-18.png");
+}
+
+.ui-icon-scrumble-thumbs-up
+{
+	background-position: 0 -18px;
+}
+
+.ui-icon-scrumble-thumbs-down {
+	background-position: 0 -36px;
+}
+
+.ui-icon-scrumble-book {
+	background-position: 0 -52px;
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2) {
+	.ui-icon-scrumble-heart,
+	.ui-icon-scrumble-thumbs-up,
+	.ui-icon-scrumble-thumbs-down {
+		background-image: url("../../../themes/scrumble/img/icons-36.png");
+		background-size: 18px 18px;
+	}
+
+	.ui-icon-scrumble-thumbs-up
+	{
+		background-position: 0 -36px;
+	}
+
+	.ui-icon-scrumble-thumbs-down {
+		background-position: 0 -72px;
+	}
+
+	.ui-icon-scrumble-book {
+		background-position: 0 -108px;
+	}
+}
