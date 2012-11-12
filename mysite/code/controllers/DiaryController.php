@@ -5,7 +5,7 @@ class DiaryController extends Controller {
 		parent::init();
 
 		if (!Member::currentUserID()) {
-			$this->redirect('Security/login');
+			$this->redirect('Security/login?BackURL=/diary');
 		}
 
 		Requirements::CSS('http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css');
