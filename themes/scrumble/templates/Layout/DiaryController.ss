@@ -14,7 +14,14 @@
 	<div data-role="collapsible-set" data-theme="e">
 		<div data-role="collapsible" data-collapsed="false" data-collapsed-icon="scrumble-heart" data-expanded-icon="scrumble-heart">
 			<h3>How did I feel today?</h3>
-			<p>Insert a drawable graph here.</p>
+			<p>Sketch your mood throughout the day on the graph:</p>
+			<div id="mood-graph">
+				<div id="graph">
+				</div>
+				<canvas id="sketchpad">
+					Sorry, your browser doesn't support canvas technology.
+				</canvas>
+			</div>
 		</div>
 		<div data-role="collapsible" data-collapsed-icon="scrumble-thumbs-up" data-expanded-icon="scrumble-thumbs-up">
 			<h3>What went well today?</h3>
