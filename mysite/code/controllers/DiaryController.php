@@ -19,15 +19,41 @@ class DiaryController extends Controller {
 		Requirements::javascript($this->ThemeDir() . '/js/diary.js');
 	}
 
-	public function getDay() {
-		return 'Monday';
-	}
-
-	public function getWeek() {
-		return 1;
-	}
-
 	public function getTitle() {
 		return 'Diary';
+	}
+
+	public function getTeam() {
+		$member = Member::currentUser();
+		if ($member) {
+			return $member->obj('Team');
+		}
+	}
+
+	public function getSprint() {
+		$team = $this->getTeam();
+		if ($team) {
+			return $team->getCurrentSprint();
+		}
+	}
+
+	public function getPreviousLink() {
+		$sprint = $this->getSprint();
+		if ($sprint) {
+			$date = $sprint->getPreviousDate();
+			if ($date) {
+				return 'diary?date=' . $date->Format('d/m/Y');
+			}
+		}
+	}
+
+	public function getNextLink() {
+		$sprint = $this->getSprint();
+		if ($sprint) {
+			$date = $sprint->getNextDate();
+			if ($date) {
+				return 'diary?date=' . $date->Format('d/m/Y');
+			}
+		}
 	}
 }
