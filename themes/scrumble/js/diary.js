@@ -90,12 +90,26 @@ $(function () {
 		yaxis: { show: false, min: -1, max: 1 }
 	};
 	plot = $.plot(graph, [ graphData ], options);
-
-	plotOffset = plot.offset();
-	plotDimensions = {x: plot.width(), y: plot.height()};
+	diary_onResize();
 	
 	graph.resize(function() {
-		plotOffset = $(this).offset();
-		plotDimensions = {x: $(this).width(), y: $(this).height()};
+		diary_onResize();
 	});
 });
+
+function diary_onResize() {
+	// Ensure that the graph takes up as much area as possible.
+	var contentContainer = $('.ui-content');
+	var containerBottomPosition = contentContainer.offset().top + contentContainer.outerHeight(true);
+	var footerTop = $('.ui-footer').offset().top;
+	var difference = footerTop - containerBottomPosition;
+	if (difference != 0) {
+		console.log(containerBottomPosition + ' ? ' + footerTop);
+		var graph = $('#mood-graph');
+		graph.css('height', graph.height() + difference);
+	}
+
+	// Recalculate the size of the plot for the pointer detection.
+	plotOffset = plot.offset();
+	plotDimensions = {x: plot.width(), y: plot.height()};
+}

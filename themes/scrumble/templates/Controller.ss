@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	$MetaTags(false)
 </head>
-<body>
+<body style="height: 100%; width: 100%; overflow: hidden;">
 	<div data-role="page">
 		$Layout
 	</div><!-- /page -->

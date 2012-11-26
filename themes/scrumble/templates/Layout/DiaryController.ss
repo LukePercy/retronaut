@@ -24,6 +24,8 @@
 			Sorry, your browser doesn't support canvas technology.
 		</canvas>
 	</div>
-	<a href="" data-role="button" data-icon="arrow-u" data-iconpos="left" data-inline="true" data-theme="e">Previous Page</a>
-	<a href="" data-role="button" data-icon="arrow-d" data-iconpos="right" data-inline="true" data-theme="e">Next Page</a>
 </div><!-- /content -->
+<div data-role="footer" data-position="fixed" class="ui-bar" data-theme="e">
+	<a href="index.html" data-role="button" data-iconpos="left" data-icon="arrow-u">Previous Page</a>
+	<a href="index.html" data-role="button" data-iconpos="right" data-icon="arrow-d">Next Page</a>
+</div>
