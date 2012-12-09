@@ -19,36 +19,34 @@
 	<p>Choose glad tags that best describe your sources of happiness today.</p>
 	<div class="ui-grid-a">
 		<div class="ui-block-a">
-			<select id="select-choice-nc" name="select-choice-8" data-theme="e">
+			<select id="tags" data-theme="e">
 				<option value="">Glad Tags</option>
-				<optgroup label="Environment">
-					<option value="env-1">First Overnight</option>
-					<option value="env-2">Express Saver</option>
-					<option value="env-3">Ground</option>
-				</optgroup>
-				<optgroup label="Management">
-					<option value="mgmt-1">First Overnight</option>
-					<option value="expressSaver">Express Saver</option>
-					<option value="ground">Ground</option>
-				</optgroup>
-				<optgroup label="Work">
-					<option value="standard">Standard: 7 day</option>
-					<option value="rush">Rush: 3 days</option>
-					<option value="express">Express: next day (disabled)</option>
-					<option value="overnight">Overnight</option>
-				</optgroup>
+				<% loop Categories %>
+					<optgroup label="$Title">
+						<% loop Tags %>
+							<option value="tag-{$Up.ID}-$ID">$Title</option>
+						<% end_loop %>
+					</optgroup>
+				<% end_loop %>
 			</select>
 		</div>
 		<div class="ui-block-b">
 			<a href="diary/addtag?type=glad" data-role="button" data-inline="true" data-iconpos="notext" data-theme="f" data-icon="add">New</a>
 		</div>
 	</div><!-- /grid-a -->
-	<a data-role="button" data-inline="true" data-theme="b">Good food</a>
-	<a data-role="button" data-inline="true" data-theme="b">Nice coffee</a>
-	<a data-role="button" data-inline="true" data-theme="b">Strong teamwork vibe</a>
-	<a data-role="button" data-inline="true" data-theme="b">Completed a lot of stories</a>
+	<div id="chosen-tags">
+		<a id="tag-3-1" data-role="button" data-inline="true" data-theme="b">Good food</a>
+		<a id="tag-3-2" data-role="button" data-inline="true" data-theme="b">Nice coffee</a>
+		<a id="tag-3-3" data-role="button" data-inline="true" data-theme="b">Strong teamwork vibe</a>
+		<a id="tag-3-4" data-role="button" data-inline="true" data-theme="b">Completed a lot of stories</a>
+	</div>
 </div><!-- /content -->
 <div data-role="footer" data-position="fixed" class="ui-bar" data-theme="e">
 	<a href="diary" data-transition="slidedown" data-role="button" data-iconpos="left" data-icon="arrow-u">Mood Graph</a>
 	<a href="diary/sads" data-role="button" data-iconpos="right" data-icon="arrow-d">Daily Sads</a>
 </div>
+<script type="text/javascript">
+	var memberId=0;
+	var sprintId=0;
+	var day=0;
+</script>

@@ -23,6 +23,7 @@ class DiaryController extends Controller {
 		Requirements::javascript($this->ThemeDir() . '/js/page.js');
 		Requirements::javascript('http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js');
 		Requirements::javascript($this->ThemeDir() . '/js/diary.js');
+		Requirements::javascript($this->ThemeDir() . '/js/taglist.js');
 	}
 
 	public function glads() {
@@ -83,5 +84,9 @@ class DiaryController extends Controller {
 				return 'diary?date=' . $date->Format('d/m/Y');
 			}
 		}
+	}
+
+	public function Categories() {
+		return Category::get();
 	}
 }
