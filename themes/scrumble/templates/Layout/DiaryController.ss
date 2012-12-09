@@ -26,6 +26,5 @@
 	</div>
 </div><!-- /content -->
 <div data-role="footer" data-position="fixed" class="ui-bar" data-theme="e">
-	<a href="index.html" data-role="button" data-iconpos="left" data-icon="arrow-u">Previous Page</a>
-	<a href="index.html" data-role="button" data-iconpos="right" data-icon="arrow-d">Next Page</a>
+	<a href="diary/glads" data-role="button" data-iconpos="right" data-icon="arrow-d">Daily Glads</a>
 </div>

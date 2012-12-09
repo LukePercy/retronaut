@@ -31,9 +31,7 @@ class Page_Controller extends ContentController {
 	public function init() {
 		parent::init();
 
-		if (!Member::currentUserID()) {
-			$this->redirect('Security/login?BackURL=/diary');
-		}
+		BasicAuth::requireLogin('Retronaut');
 
 		Requirements::CSS('http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css');
 		Requirements::themedCSS('jquery-mobile-local');
