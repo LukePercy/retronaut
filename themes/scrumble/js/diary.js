@@ -11,16 +11,18 @@ var graphData = [];
 
 function init() {
 	canvas = document.getElementById("sketchpad");
-	ctx = canvas.getContext("2d");
-	
-	canvas.addEventListener("mousedown", mouseDown, false);
-	canvas.addEventListener("mousemove", mouseXY, false);
-	canvas.addEventListener("touchstart", touchDown, false);
-	canvas.addEventListener("touchmove", touchXY, true);
-	canvas.addEventListener("touchend", touchUp, false);
-	
-	document.body.addEventListener("mouseup", mouseUp, false);
-	document.body.addEventListener("touchcancel", touchUp, false);
+	if (canvas) {
+		ctx = canvas.getContext("2d");
+		
+		canvas.addEventListener("mousedown", mouseDown, false);
+		canvas.addEventListener("mousemove", mouseXY, false);
+		canvas.addEventListener("touchstart", touchDown, false);
+		canvas.addEventListener("touchmove", touchXY, true);
+		canvas.addEventListener("touchend", touchUp, false);
+		
+		document.body.addEventListener("mouseup", mouseUp, false);
+		document.body.addEventListener("touchcancel", touchUp, false);
+	}
 }
 
 function mouseUp(e) {
@@ -80,21 +82,21 @@ function showPos() {
 
 window.addEventListener('load', init, false);
 
-// Flot Testing:
 $(function () {
 	var graph = $('#graph');
-
-	// Set up plot
-	var options = {
-		xaxis: { show: false, min: 0, max: 1 },
-		yaxis: { show: false, min: -1, max: 1 }
-	};
-	plot = $.plot(graph, [ graphData ], options);
-	diary_onResize();
-	
-	graph.resize(function() {
+	if (graph.length > 0) {
+		// Set up plot
+		var options = {
+			xaxis: { show: false, min: 0, max: 1 },
+			yaxis: { show: false, min: -1, max: 1 }
+		};
+		plot = $.plot(graph, [ graphData ], options);
 		diary_onResize();
-	});
+		
+		graph.resize(function() {
+			diary_onResize();
+		});
+	}
 });
 
 function diary_onResize() {

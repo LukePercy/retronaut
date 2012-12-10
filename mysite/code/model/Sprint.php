@@ -35,20 +35,25 @@ class Sprint extends DataObject {
 	}
 
 	public function getWeek() {
-		$date = $this->getDate();
+		return ($this->getDayIndex() / 7) + 1;
+	}
 
+	// Returns the index of the day into the sprint - Monday of Week 2 = 8
+	// TODO: remove weekends from calculations
+	public function getDayIndex() {
+		$date = $this->getDate();
 		$startDate = $this->obj('StartDate');
-		$daysSinceSprintBegan = $date->days_between(
+
+		return $date->days_between(
 			$startDate->format('Y'),
 			$startDate->format('n'),
 			$startDate->format('j'),
 			$date->format('Y'),
 			$date->format('n'),
 			$date->format('j'));
-
-		return floor($daysSinceSprintBegan / 7) + 1;
 	}
 
+	// TODO: remove weekends from calculations
 	public function getPreviousDate() {
 		$date = $this->getDate();
 		$startDate = $this->obj('StartDate');
@@ -63,6 +68,7 @@ class Sprint extends DataObject {
 		return $previousDate;
 	}
 
+	// TODO: remove weekends from calculations
 	public function getNextDate() {
 		$date = $this->getDate();
 		$endDate = $this->obj('EndDate');

@@ -3,7 +3,8 @@
 class TagController extends Controller {
 
 	public static $allowed_actions = array(
-		'save'
+		'add',
+		'remove'
 	);
 
 	public function init() {
@@ -12,14 +13,25 @@ class TagController extends Controller {
 		BasicAuth::requireLogin('Retronaut');
 	}
 
-	public function save() {
-		$tagId = $this->request->getVar('tag');
-		$MemberId = $this->request->getVar('member');
-		$sprintId = $this->request->getVar('sprint');
-		$day = $this->request->getVar('day');
+	public function add() {
+		$tagId = $this->request->postVar('tag');
+		$memberId = $this->request->postVar('member');
+		$sprintId = $this->request->postVar('sprint');
+		$day = $this->request->postVar('day');
 
 		// Add this to the many-many relationship.
 
-		return 'success';
+		return "add: $tagId, $memberId, $sprintId, $day";
+	}
+
+	public function remove() {
+		$tagId = $this->request->postVar('tag');
+		$memberId = $this->request->postVar('member');
+		$sprintId = $this->request->postVar('sprint');
+		$day = $this->request->postVar('day');
+
+		// Remove this from the many-many relationship.
+
+		return "remove: $tagId, $memberId, $sprintId, $day";
 	}
 }
