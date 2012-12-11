@@ -1,6 +1,6 @@
 <?php
 
-class DiaryController extends Controller {
+class DiaryController extends SecureController {
 
 	public static $allowed_actions = array(
 		'index',
@@ -11,8 +11,6 @@ class DiaryController extends Controller {
 
 	public function init() {
 		parent::init();
-
-		BasicAuth::requireLogin('Retronaut');
 
 		Requirements::themedCSS('jquery.mobile-1.2.0.min');
 		Requirements::themedCSS('jquery-mobile-local');

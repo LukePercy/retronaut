@@ -38,7 +38,9 @@
 -->
 	</div><!-- /grid-a -->
 	<div id="chosen-tags">
-		<a id="tag-1" data-role="button" data-inline="true" data-theme="b" data-icon="delete">Test</a>
+		<% loop $CurrentMember.getTags('Glad') %>
+			<a id="tag-$ID" data-role="button" data-inline="true" data-theme="b" data-icon="delete">$Name</a>
+		<% end_loop %>
 	</div>
 </div><!-- /content -->
 <div data-role="footer" data-position="fixed" class="ui-bar" data-theme="e">

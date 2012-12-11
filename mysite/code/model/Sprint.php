@@ -35,7 +35,7 @@ class Sprint extends DataObject {
 	}
 
 	public function getWeek() {
-		return ($this->getDayIndex() / 7) + 1;
+		return floor($this->getDayIndex() / 7) + 1;
 	}
 
 	// Returns the index of the day into the sprint - Monday of Week 2 = 8

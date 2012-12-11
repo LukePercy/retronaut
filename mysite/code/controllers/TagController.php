@@ -1,6 +1,6 @@
 <?php
 
-class TagController extends Controller {
+class TagController extends SecureController {
 
 	public static $allowed_actions = array(
 		'add',
@@ -9,29 +9,41 @@ class TagController extends Controller {
 
 	public function init() {
 		parent::init();
-
-		BasicAuth::requireLogin('Retronaut');
 	}
 
 	public function add() {
-		$tagId = $this->request->postVar('tag');
-		$memberId = $this->request->postVar('member');
-		$sprintId = $this->request->postVar('sprint');
+		$tagID = $this->request->postVar('tag');
+		$memberID = $this->request->postVar('member');
+		$sprintID = $this->request->postVar('sprint');
 		$day = $this->request->postVar('day');
 
-		// Add this to the many-many relationship.
+		$member = Member::currentUser();
+		if (!$member) {
+			return 'Member not found';
+		}
 
-		return "add: $tagId, $memberId, $sprintId, $day";
+		if ($member->addTag($tagID, $sprintID, $day)) {
+			return 'success';
+		}
+
+		return 'failure';
 	}
 
 	public function remove() {
-		$tagId = $this->request->postVar('tag');
-		$memberId = $this->request->postVar('member');
-		$sprintId = $this->request->postVar('sprint');
+		$tagID = $this->request->postVar('tag');
+		$memberID = $this->request->postVar('member');
+		$sprintID = $this->request->postVar('sprint');
 		$day = $this->request->postVar('day');
 
-		// Remove this from the many-many relationship.
+		$member = Member::currentUser();
+		if (!$member) {
+			return 'Member not found';
+		}
 
-		return "remove: $tagId, $memberId, $sprintId, $day";
+		if ($member->removeTag($tagID, $sprintID, $day)) {
+			return 'success';
+		}
+
+		return 'failure';
 	}
 }

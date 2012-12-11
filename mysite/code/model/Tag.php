@@ -10,7 +10,5 @@ class Tag extends DataObject {
 		'Category' => 'Category'
 	);
 
-	static $belongs_many_many = array(
-		'Members' => 'Member'
-	);
+	// Custom relation to Member, see TagMemberRelation for more information.
 }

@@ -106,7 +106,6 @@ function diary_onResize() {
 	var footerTop = $('.ui-footer').offset().top;
 	var difference = footerTop - containerBottomPosition;
 	if (difference != 0) {
-		console.log(containerBottomPosition + ' ? ' + footerTop);
 		var graph = $('#mood-graph');
 		graph.css('height', graph.height() + difference);
 	}
