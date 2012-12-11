@@ -6,7 +6,7 @@ class DiaryController extends SecureController {
 		'index',
 		'glads',
 		'sads',
-		'addtag'
+		'summary'
 	);
 
 	public function init() {
@@ -32,9 +32,12 @@ class DiaryController extends SecureController {
 		return $this->renderWith(array('DiaryController_sads', 'Controller'));
 	}
 
+/*
+	TODO: Add the ability to add custom tags.
 	public function addtag() {
 		return $this->renderWith(array('DiaryController_addtag', 'Controller'));
 	}
+*/
 
 	public function summary() {
 		// This shows the current sprint's mood graph to date, perhaps with the day that you've just filled in as a
@@ -64,13 +67,32 @@ class DiaryController extends SecureController {
 		}
 	}
 
-	public function getPreviousLink() {
+	public function getLink($action = null, $day = 0) {
+		if ($action) {
+			if ($action != 'index') {
+				$actionSegment = "/$action";
+			}
+		} else {
+			$actionSegment = $this->getActionSegment();
+		}
+
+		if ($day != 0) {
+			$sprint = $this->getSprint();
+			if ($day < 0) {
+				$date = $sprint->getPreviousDate();
+			} else {
+				$date = $sprint->getNextDate();
+			}
+			$daySegment = '?date=' . $date->Format('d/m/Y');
+		}
+
+		return '/diary' . $actionSegment . $daySegment;
+	}
+
+	public function getPreviousDate() {
 		$sprint = $this->getSprint();
 		if ($sprint) {
-			$date = $sprint->getPreviousDate();
-			if ($date) {
-				return 'diary?date=' . $date->Format('d/m/Y');
-			}
+			return $sprint->getPreviousDate();
 		}
 	}
 
@@ -79,8 +101,14 @@ class DiaryController extends SecureController {
 		if ($sprint) {
 			$date = $sprint->getNextDate();
 			if ($date) {
-				return 'diary?date=' . $date->Format('d/m/Y');
+				return 'diary' . $this->getActionSegment() . '?date=' . $date->Format('d/m/Y');
 			}
+		}
+	}
+
+	public function getActionSegment() {
+		if ($this->action != 'index') {
+			return '/' . $this->action;
 		}
 	}
 

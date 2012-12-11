@@ -16,15 +16,10 @@ class TeamMemberRole extends DataExtension {
 			'"SprintID" = ' . $sprintID . ' AND ' .
 			'"Day" = ' . $day);
 
-		$typeWhere = null;
-		if ($type) {
-			$typeWhere = '"Type"=\'' . $type ."'";
-		}
-
 		$tagObjects = array();
 		foreach ($tags as $tag) {
-			$tagObject = DataObject::get_by_id('Tag', $tag->TagID, $typeWhere);
-			if ($tagObject) {
+			$tagObject = DataObject::get_by_id('Tag', $tag->TagID);
+			if ($tagObject && (!$type || $tagObject->Type == $type)) {
 				$tagObjects[] = $tagObject;
 			}
 		}
