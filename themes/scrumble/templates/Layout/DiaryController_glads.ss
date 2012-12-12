@@ -36,12 +36,4 @@
 	<a href="$getLink('index')" data-transition="slidedown" data-role="button" data-iconpos="left" data-icon="arrow-u">Mood Graph</a>
 	<a href="$getLink('sads')" data-role="button" data-iconpos="right" data-icon="arrow-d">Daily Sads</a>
 </div>
-<script type="text/javascript">
-	<% with $CurrentMember %>
-		var memberId=$ID;
-		<% with $Team.CurrentSprint %>
-			var sprintId=$ID;
-			var day=$DayIndex;
-		<% end_with %>
-	<% end_with %>
-</script>
+<% include DiaryVariables %>

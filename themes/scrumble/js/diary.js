@@ -3,11 +3,14 @@ var ctx;
 var canvasX;
 var canvasY;
 var mouseIsDown = 0;
+var mouseReleased = 1;
 
 var plot;
 var plotOffset;
 var plotPosition;
-var graphData = [];
+var extentX = 0;
+
+var unsavedGraphData = '';
 
 function init() {
 	canvas = document.getElementById("sketchpad");
@@ -27,12 +30,22 @@ function init() {
 
 function mouseUp(e) {
 	mouseIsDown = 0;
+	mouseReleased = 1;
 	mouseXY(e);
+
+	if (unsavedGraphData.length > 0) {
+		savePoints();
+	}
 }
 
 function touchUp() {
 	mouseIsDown = 0;
+	mouseReleased = 1;
 	showPos();
+
+	if (unsavedGraphData.length > 0) {
+		savePoints();
+	}
 }
 
 function mouseDown(e) {
@@ -68,16 +81,78 @@ function showPos() {
 			y: (canvasY - plotOffset.top) / plotDimensions.y
 		};
 
+		if (position.x <= extentX) {
+			if (mouseReleased) {
+				clearPoints();
+				mouseReleased = false;
+			} else {
+				return;
+			}
+		} else {
+			if (mouseReleased) {
+				mouseReleased = false;
+			}
+		}
+
 		if (position.x >= 0 &&
 			position.y >= 0 &&
 			position.x <= 1 &&
 			position.y <= 1)
 		{
-			graphData.push([position.x, 1 - 2 * position.y]);
+			graphData.push([position.x, 1 - position.y]);
 			plot.setData([graphData]);
 			plot.draw();
+
+			if (unsavedGraphData.length > 0) {
+				unsavedGraphData += "\n";
+			}
+			unsavedGraphData += position.x + ',' + position.y;
+			if (unsavedGraphData.length > 1000) {
+				savePoints();
+			}
 		}
+
+		extentX = position.x;
 	}
+}
+
+function savePoints() {
+	// TODO: Add progress indicator
+	$.post(
+		'/vertices/add',
+		{
+			vertices: unsavedGraphData,
+			member: memberId,
+			sprint: sprintId,
+			day: day
+		},
+		function(data) {
+			// TODO: Remove progress indicator.
+		}
+	);
+
+	unsavedGraphData = '';
+}
+
+function clearPoints() {
+	graphData = [];
+	plot.setData([graphData]);
+	plot.draw();
+
+	extentX = 0;
+
+	// TODO: Add progess indicator.
+	$.post(
+		'/vertices/remove',
+		{
+			member: memberId,
+			sprint: sprintId,
+			day: day
+		},
+		function(data) {
+			// TODO: Remove progress indicator.
+		}
+	);
 }
 
 window.addEventListener('load', init, false);
@@ -88,10 +163,14 @@ $(function () {
 		// Set up plot
 		var options = {
 			xaxis: { show: false, min: 0, max: 1 },
-			yaxis: { show: false, min: -1, max: 1 }
+			yaxis: { show: false, min: 0, max: 1 }
 		};
-		plot = $.plot(graph, [ graphData ], options);
+
+		plot = $.plot(graph, [graphData], options);
 		diary_onResize();
+		if (graphData.length > 0) {
+			extentX = graphData[graphData.length - 1][0];
+		}
 		
 		graph.resize(function() {
 			diary_onResize();

@@ -13,3 +13,11 @@
 <div data-role="footer" data-position="fixed" class="ui-bar" data-theme="e">
 	<a href="diary/glads" data-role="button" data-iconpos="right" data-icon="arrow-d">Daily Glads</a>
 </div>
+<% include DiaryVariables %>
+<script type="text/javascript">
+	var graphData = [
+		<% loop $CurrentMember.getVertices() %>
+			[$X, $InverseY]<% if not $Last %>,<% end_if %>
+		<% end_loop %>
+	];
+</script>

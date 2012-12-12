@@ -64,4 +64,47 @@ class TeamMemberRole extends DataExtension {
 
 		return false;
 	}
+
+	// Custom relation to Member, see VertexMemberRelation for more information.
+	public function getVertices($sprintID = null, $day = null) {
+		$memberID = $this->owner->ID;
+		$sprintID = $sprintID ? $sprintID : $this->owner->Team()->getCurrentSprint()->ID;
+		$day = $day ? $day : $this->owner->Team()->getCurrentSprint()->getDayIndex();
+
+		return DataObject::get('VertexMemberRelation',
+			'"MemberID" = ' . $memberID . ' AND ' .
+			'"SprintID" = ' . $sprintID . ' AND ' .
+			'"Day" = ' . $day,
+			'X ASC');
+	}
+	
+	public function addVertex($vertexX, $vertexY, $sprintID, $day) {
+		$memberID = $this->owner->ID;
+
+		$vertex = new VertexMemberRelation();
+		$vertex->X = $vertexX;
+		$vertex->Y = $vertexY;
+		$vertex->MemberID = $memberID;
+		$vertex->SprintID = $sprintID;
+		$vertex->Day = $day;
+		$vertex->write();
+
+		return true;
+	}
+
+	public function removeVertices($sprintID, $day) {
+		$memberID = $this->owner->ID;
+		$vertices = DataObject::get('VertexMemberRelation',
+			'"MemberID"=' . $memberID . ' AND ' .
+			'"SprintID"=' . $sprintID . ' AND ' .
+			'"Day"=' . $day);
+
+		if ($vertices) {
+			foreach ($vertices as $vertex) {
+				$vertex->delete();
+			}
+		}
+
+		return true;
+	}
 }

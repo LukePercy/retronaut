@@ -25,11 +25,11 @@ class DiaryController extends SecureController {
 	}
 
 	public function glads() {
-		return $this->renderWith(array('DiaryController_glads', 'Controller'));
+		return $this->renderWith(array('DiaryController_glads', 'DiaryController', 'Controller'));
 	}
 
 	public function sads() {
-		return $this->renderWith(array('DiaryController_sads', 'Controller'));
+		return $this->renderWith(array('DiaryController_sads', 'DiaryController', 'Controller'));
 	}
 
 /*
@@ -46,7 +46,7 @@ class DiaryController extends SecureController {
 		//  - If it's the last day of the sprint, a link to RETRO TIME.
 		//  - If it's the current day, a link back to the main menu.
 		//  - Otherwise a link to the next day in the sprint.
-		return $this->renderWith(array('DiaryController_summary', 'Controller'));
+		return $this->renderWith(array('DiaryController_summary', 'DiaryController', 'Controller'));
 	}
 
 	public function getTitle() {

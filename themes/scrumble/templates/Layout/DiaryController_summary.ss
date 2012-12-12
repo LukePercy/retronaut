@@ -19,12 +19,3 @@
 	<a href="$getLink('sads')" data-transition="slidedown" data-role="button" data-iconpos="left" data-icon="arrow-u">Daily Sads</a>
 	<!-- <a href="$getPostSummaryLink" data-role="button" data-iconpos="right" data-icon="arrow-d">?</a> -->
 </div>
-<script type="text/javascript">
-	<% with $CurrentMember %>
-		var memberId=$ID;
-		<% with $Team.CurrentSprint %>
-			var sprintId=$ID;
-			var day=$DayIndex;
-		<% end_with %>
-	<% end_with %>
-</script>

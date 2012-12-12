@@ -6,3 +6,4 @@ Director:
     rules:
         'diary/$Action/$ID/$Name': 'DiaryController'
         'tags/$Action/$ID/$Name': 'TagController'
+        'vertices/$Action/$ID/$Name': 'VertexController'
