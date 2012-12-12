@@ -112,7 +112,23 @@ class DiaryController extends SecureController {
 		}
 	}
 
-	public function Categories() {
-		return Category::get();
+	public function Categories($type = null) {
+		$categories = Category::get();
+
+		if (!$type) {
+			return $categories;
+		}
+
+		$filteredCategories = array();
+		foreach ($categories as $category) {
+			foreach ($category->Tags() as $tag) {
+				if ($tag->Type == $type) {
+					$filteredCategories[] = $category;
+					continue 2;
+				}
+			}
+		}
+
+		return new ArrayList($filteredCategories);
 	}
 }

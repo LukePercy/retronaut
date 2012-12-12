@@ -6,10 +6,14 @@
 		<div class="ui-block-a">
 			<select id="tags" data-theme="e">
 				<option value="">Glads</option>
-				<% loop Categories %>
+				<% loop $Categories(Glad) %>
 					<optgroup label="$Title">
-						<% loop Tags %>
-							<option value="tag-$ID">$Title</option>
+						<% loop $Tags %>
+							<% if $Type == Glad %>
+								<option value="tag-$ID">$Title</option>
+							<% else %>
+								<option value="tag-$ID">$Type</option>
+							<% end_if %>
 						<% end_loop %>
 					</optgroup>
 				<% end_loop %>
