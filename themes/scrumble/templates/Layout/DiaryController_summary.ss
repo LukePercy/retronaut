@@ -15,7 +15,7 @@
 		<% end_loop %>
 	</div>
 </div><!-- /content -->
-<div data-role="footer" data-position="fixed" class="ui-bar" data-theme="e">
+<div data-role="footer" data-position="fixed" class="ui-bar" data-theme="e" data-tap-toggle="false">
 	<a href="$getLink('sads')" data-transition="slidedown" data-role="button" data-iconpos="left" data-icon="arrow-u">Daily Sads</a>
 	<!-- <a href="$getPostSummaryLink" data-role="button" data-iconpos="right" data-icon="arrow-d">?</a> -->
 </div>

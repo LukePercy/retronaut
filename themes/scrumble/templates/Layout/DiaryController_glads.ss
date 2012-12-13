@@ -30,7 +30,7 @@
 		<% end_loop %>
 	</div>
 </div><!-- /content -->
-<div data-role="footer" data-position="fixed" class="ui-bar" data-theme="e">
+<div data-role="footer" data-position="fixed" class="ui-bar" data-theme="e" data-tap-toggle="false">
 	<a href="$getLink('index')" data-transition="slidedown" data-role="button" data-iconpos="left" data-icon="arrow-u">Mood Graph</a>
 	<a href="$getLink('sads')" data-role="button" data-iconpos="right" data-icon="arrow-d">Daily Sads</a>
 </div>
