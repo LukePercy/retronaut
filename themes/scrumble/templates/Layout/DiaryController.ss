@@ -1,7 +1,7 @@
 <% include DiaryHeader %>
 <div data-role="content">
 	<h3>How did I feel today?</h3>
-	<p>Sketch your mood throughout the day on the graph:</p>
+	<p>Sketch your mood throughout the day on the graph: ($Sprint.DayIndex)</p>
 	<div id="mood-graph">
 		<div id="graph">
 		</div>

@@ -35,22 +35,26 @@ class Sprint extends DataObject {
 	}
 
 	public function getWeek() {
-		return floor($this->getDayIndex() / 7) + 1;
+		return floor($this->getDayIndex() / 5) + 1;
 	}
 
-	// Returns the index of the day into the sprint - Monday of Week 2 = 8
+	// Returns the index of the day into the sprint - Tuesday of Week 2 = 7
 	// TODO: remove weekends from calculations
 	public function getDayIndex() {
 		$date = $this->getDate();
 		$startDate = $this->obj('StartDate');
 
-		return $date->days_between(
+		$days_between = $date->days_between(
 			$startDate->format('Y'),
 			$startDate->format('n'),
 			$startDate->format('j'),
 			$date->format('Y'),
 			$date->format('n'),
 			$date->format('j'));
+
+		// Remove the weekends from the equation;
+		$day_index = ($startDate->format('N') - 1) + $days_between;
+		return $days_between - floor($day_index / 7) * 2;
 	}
 
 	public function getDate() {
@@ -65,7 +69,6 @@ class Sprint extends DataObject {
 		}
 	}
 
-	// TODO: remove weekends from calculations
 	public function getPreviousDate() {
 		$date = $this->getDate();
 		$startDate = $this->obj('StartDate');
@@ -76,11 +79,14 @@ class Sprint extends DataObject {
 		}
 
 		$previousDate = new SS_DateTime('PreviousDate');
-		$previousDate->setValue($date->day_before($date->format('Y'), $date->format('n'), $date->format('j')));
+		$previousDate->setValue($date->getValue());
+		do {
+			$previousDate->setValue($previousDate->day_before($previousDate->format('Y'), $previousDate->format('n'), $previousDate->format('j')));
+		} while ($previousDate->format('N') >= 6); // Skip past weekends.
+
 		return $previousDate;
 	}
 
-	// TODO: remove weekends from calculations
 	public function getNextDate() {
 		$date = $this->getDate();
 		if ($date->isToday()) {
@@ -95,7 +101,11 @@ class Sprint extends DataObject {
 		}
 
 		$nextDate = new SS_DateTime('NextDate');
-		$nextDate->setValue($date->next_day($date->format('Y'), $date->format('n'), $date->format('j')));
+		$nextDate->setValue($date->getValue());
+		do {
+			$nextDate->setValue($nextDate->next_day($nextDate->format('Y'), $nextDate->format('n'), $nextDate->format('j')));
+		} while ($nextDate->format('N') >= 6); // Skip past weekends.
+
 		return $nextDate;
 	}
 }
