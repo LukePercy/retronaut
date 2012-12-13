@@ -68,6 +68,7 @@ class DiaryController extends SecureController {
 	}
 
 	public function getLink($action = null, $day = 0) {
+		$actionSegment = '';
 		if ($action) {
 			if ($action != 'index') {
 				$actionSegment = "/$action";
@@ -76,6 +77,7 @@ class DiaryController extends SecureController {
 			$actionSegment = $this->getActionSegment();
 		}
 
+		$daySegment = '';
 		if ($day != 0) {
 			$sprint = $this->getSprint();
 			if ($day < 0) {
@@ -86,7 +88,7 @@ class DiaryController extends SecureController {
 			$daySegment = '?date=' . $date->Format('d/m/Y');
 		}
 
-		return '/diary' . $actionSegment . $daySegment;
+		return 'diary' . $actionSegment . $daySegment;
 	}
 
 	public function getPreviousDate() {
