@@ -168,7 +168,7 @@ $(function () {
 			yaxis: { show: false, min: 0, max: 1 }
 		};
 
-		plot = $.plot(graph, [graphData], options);
+		plot = $.plot(graph, graphData, options);
 		diary_onResize();
 		if (graphData.length > 0) {
 			extentX = graphData[graphData.length - 1][0];

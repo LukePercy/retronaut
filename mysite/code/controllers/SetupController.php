@@ -18,7 +18,6 @@ class SetupController extends SecureController {
 		Requirements::javascript($this->ThemeDir() . '/js/jquery.flot.resize.js');
 		Requirements::javascript($this->ThemeDir() . '/js/page.js');
 		Requirements::javascript($this->ThemeDir() . '/js/jquery.mobile-1.2.0.min.js');
-		Requirements::javascript($this->ThemeDir() . '/js/diary.js');
 		Requirements::javascript($this->ThemeDir() . '/js/taglist.js');
 	}
 
