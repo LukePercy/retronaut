@@ -15,7 +15,7 @@
 			$Content
 			<a href="diary" data-role="button" data-icon="ui-icon-scrumble-book" data-iconpos="right">Dev Diary</a>
 			<a href="setup" data-role="button" data-icon="gear" data-iconpos="right">Setup</a>
-			<a href="retrospective" data-role="button" data-icon="alert" data-iconpos="right">Retro Time!</a>
+			<a href="retro" data-role="button" data-icon="alert" data-iconpos="right">Retro Time!</a>
 		</div><!-- /content -->
 	</div><!-- /page -->
 </body>
