@@ -8,9 +8,9 @@
 </head>
 <body>
 	<div data-role="page">
-		<div data-role="header" data-theme="e">
+		<div data-role="header" data-theme="b">
 			<h1>Retronaut</h1>
-		</div><!-- /header -->
+		</div><!-- /siteheader -->
 		<div data-role="content">
 			$Content
 			<a href="diary" data-role="button" data-icon="ui-icon-scrumble-book" data-iconpos="right">Dev Diary</a>
