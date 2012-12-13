@@ -5,7 +5,8 @@ class RetroController extends SecureController {
 	public static $allowed_actions = array(
 		'index',
 		'trends',
-		'discuss'
+		'discuss',
+		'actions'
 	);
 
 	public function init() {
@@ -28,6 +29,10 @@ class RetroController extends SecureController {
 
 	public function discuss() {
 		return $this->renderWith(array('RetroController_discuss', 'RetroController', 'Controller'));
+	}
+
+	public function actions() {
+		return $this->renderWith(array('RetroController_actions', 'RetroController', 'Controller'));
 	}
 
 	public function getTitle() {
