@@ -119,7 +119,7 @@ function showPos() {
 function savePoints() {
 	// TODO: Add progress indicator
 	$.post(
-		'/vertices/add',
+		'vertices/add',
 		{
 			vertices: unsavedGraphData,
 			member: memberId,
@@ -143,7 +143,7 @@ function clearPoints() {
 
 	// TODO: Add progess indicator.
 	$.post(
-		'/vertices/remove',
+		'vertices/remove',
 		{
 			member: memberId,
 			sprint: sprintId,

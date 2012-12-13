@@ -11,8 +11,6 @@
 						<% loop $Tags %>
 							<% if $Type == Sad %>
 								<option value="tag-$ID">$Title</option>
-							<% else %>
-								<option value="tag-$ID">$Type</option>
 							<% end_if %>
 						<% end_loop %>
 					</optgroup>

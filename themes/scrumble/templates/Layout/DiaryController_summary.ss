@@ -5,13 +5,13 @@
 	<h4>Glads</h4>
 	<div id="glad-tags">
 		<% loop $CurrentMember.getTags('Glad') %>
-			<a id="tag-$ID" data-role="button" data-inline="true" data-theme="b" data-icon="delete">$Name</a>
+			<a id="tag-$ID" data-role="button" data-inline="true" data-theme="b">$Name</a>
 		<% end_loop %>
 	</div>
 	<h4>Sads</h4>
 	<div id="sad-tags">
 		<% loop $CurrentMember.getTags('Sad') %>
-			<a id="tag-$ID" data-role="button" data-inline="true" data-theme="b" data-icon="delete">$Name</a>
+			<a id="tag-$ID" data-role="button" data-inline="true" data-theme="b">$Name</a>
 		<% end_loop %>
 	</div>
 </div><!-- /content -->

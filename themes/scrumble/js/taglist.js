@@ -22,7 +22,7 @@ $(window).load(function(){
 			var tagId = tagParts[tagParts.length - 1];
 			// TODO: Add progress indicator
 			$.post(
-				'/tags/add',
+				'tags/add',
 				{
 					tag: tagId,
 					member: memberId,
@@ -48,7 +48,7 @@ $(window).load(function(){
 		var tagId = tagParts[tagParts.length - 1];
 		// TODO: Add progress indicator.
 		$.post(
-			'/tags/remove',
+			'tags/remove',
 			{
 				tag: tagId,
 				member: memberId,
