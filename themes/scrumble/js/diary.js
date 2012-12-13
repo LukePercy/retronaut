@@ -17,14 +17,16 @@ function init() {
 	if (canvas) {
 		ctx = canvas.getContext("2d");
 		
-		canvas.addEventListener("mousedown", mouseDown, false);
-		canvas.addEventListener("mousemove", mouseXY, false);
-		canvas.addEventListener("touchstart", touchDown, false);
-		canvas.addEventListener("touchmove", touchXY, true);
-		canvas.addEventListener("touchend", touchUp, false);
-		
-		document.body.addEventListener("mouseup", mouseUp, false);
-		document.body.addEventListener("touchcancel", touchUp, false);
+		if ('undefined' == typeof interactive || interactive) {
+			canvas.addEventListener("mousedown", mouseDown, false);
+			canvas.addEventListener("mousemove", mouseXY, false);
+			canvas.addEventListener("touchstart", touchDown, false);
+			canvas.addEventListener("touchmove", touchXY, true);
+			canvas.addEventListener("touchend", touchUp, false);
+			
+			document.body.addEventListener("mouseup", mouseUp, false);
+			document.body.addEventListener("touchcancel", touchUp, false);
+		}
 	}
 }
 

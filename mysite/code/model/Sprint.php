@@ -53,6 +53,18 @@ class Sprint extends DataObject {
 			$date->format('j'));
 	}
 
+	public function getDate() {
+		$request = Controller::curr()->request;
+		$requestedDate = $request->getVar('date');
+		if ($requestedDate) {
+			$date = new SS_DateTime('RequestedDate');
+			$date->setValue($requestedDate);
+			return $date;
+		} else {
+			return SS_Datetime::now();
+		}
+	}
+
 	// TODO: remove weekends from calculations
 	public function getPreviousDate() {
 		$date = $this->getDate();
@@ -71,6 +83,10 @@ class Sprint extends DataObject {
 	// TODO: remove weekends from calculations
 	public function getNextDate() {
 		$date = $this->getDate();
+		if ($date->isToday()) {
+			return;
+		}
+		
 		$endDate = $this->obj('EndDate');
 		if ($date->format('Y') > $endDate->format('Y') ||
 			$date->format('n') > $endDate->format('n') ||
@@ -81,17 +97,5 @@ class Sprint extends DataObject {
 		$nextDate = new SS_DateTime('NextDate');
 		$nextDate->setValue($date->next_day($date->format('Y'), $date->format('n'), $date->format('j')));
 		return $nextDate;
-	}
-
-	protected function getDate() {
-		$request = Controller::curr()->request;
-		$requestedDate = $request->getVar('date');
-		if ($requestedDate) {
-			$date = new SS_DateTime('RequestedDate');
-			$date->setValue($requestedDate);
-			return $date;
-		} else {
-			return SS_Datetime::now();
-		}
 	}
 }

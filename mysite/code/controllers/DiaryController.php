@@ -77,14 +77,18 @@ class DiaryController extends SecureController {
 			$actionSegment = $this->getActionSegment();
 		}
 
+		$sprint = $this->getSprint();
+		$date = $sprint->getDate();
 		$daySegment = '';
 		if ($day != 0) {
-			$sprint = $this->getSprint();
 			if ($day < 0) {
 				$date = $sprint->getPreviousDate();
 			} else {
 				$date = $sprint->getNextDate();
 			}
+		}
+		if (!$date->IsToday())
+		{
 			$daySegment = '?date=' . $date->Format('d/m/Y');
 		}
 
