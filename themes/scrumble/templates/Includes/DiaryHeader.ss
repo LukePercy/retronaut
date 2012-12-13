@@ -1,5 +1,5 @@
 <div data-role="header" data-theme="a">
-	<a href="" data-icon="home" data-iconpos="notext">Home</a>
+	<a href="." data-icon="home" data-iconpos="notext">Home</a>
 	<h1>
 		<span class="ui-icon ui-icon-scrumble-book"></span>
 		$Title
