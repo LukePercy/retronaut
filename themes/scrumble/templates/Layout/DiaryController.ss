@@ -1,7 +1,7 @@
 <% include DiaryHeader %>
 <div data-role="content">
 	<h3>How did I feel today?</h3>
-	<p>Sketch your mood throughout the day on the graph:</p>
+	<p>Sketch your mood throughout the day on the graph: ($CurrentMember.Team.CurrentSprint.DayIndex)</p>
 	<div id="mood-graph">
 		<div id="graph">
 		</div>
@@ -16,7 +16,7 @@
 <% include DiaryVariables %>
 <script type="text/javascript">
 	var graphData = [
-		<% loop $CurrentMember.getVertices() %>
+		<% loop $CurrentMember.getGraphDataForDay() %>
 			[$X, $InverseY]<% if not $Last %>,<% end_if %>
 		<% end_loop %>
 	];

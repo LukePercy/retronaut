@@ -66,6 +66,52 @@ class TeamMemberRole extends DataExtension {
 	}
 
 	// Custom relation to Member, see VertexMemberRelation for more information.
+	public function getGraphDataForDay($sprintID = null, $day = null) {
+		$memberID = $this->owner->ID;
+		$sprintID = $sprintID ? $sprintID : $this->owner->Team()->getCurrentSprint()->ID;
+		$day = $day ? $day : $this->owner->Team()->getCurrentSprint()->getDayIndex();
+
+		return DataObject::get('VertexMemberRelation',
+			'"MemberID" = ' . $memberID . ' AND ' .
+			'"SprintID" = ' . $sprintID . ' AND ' .
+			'"Day" = ' . $day,
+			'X ASC');
+	}
+
+	// Custom relation to Member, see VertexMemberRelation for more information.
+	public function getGraphDataForSprint($sprintID = null) {
+		$memberID = $this->owner->ID;
+		$sprintID = $sprintID ? $sprintID : $this->owner->Team()->getCurrentSprint()->ID;
+		$sprint = Sprint::get_by_id('Sprint', $sprintID);
+
+		if (!$sprint) {
+			return false;
+		}
+
+		$vertices = array();
+		$numDaysInSprint = $sprint->getNumDays();
+		for ($day = 0; $day < $numDaysInSprint; $day++) {
+
+			$dayVertices = DataObject::get('VertexMemberRelation',
+				'"MemberID" = ' . $memberID . ' AND ' .
+				'"SprintID" = ' . $sprintID . ' AND ' .
+				'"Day" = ' . $day,
+				'X ASC');
+
+			$XOffset = (1 / $numDaysInSprint) * $day;
+
+			foreach ($dayVertices as $vertex) {
+				$vertices[] = new ArrayData(array(
+					'X' => $XOffset + ($vertex->X / $numDaysInSprint),
+					'Y' => 1 - $vertex->Y
+				));
+			}
+		}
+
+		return new ArrayList($vertices);
+	}
+
+	// Custom relation to Member, see VertexMemberRelation for more information.
 	public function getVertices($sprintID = null, $day = null) {
 		$memberID = $this->owner->ID;
 		$sprintID = $sprintID ? $sprintID : $this->owner->Team()->getCurrentSprint()->ID;

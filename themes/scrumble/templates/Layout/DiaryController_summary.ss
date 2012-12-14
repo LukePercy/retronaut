@@ -12,12 +12,18 @@
 </div><!-- /content -->
 <div data-role="footer" data-position="fixed" class="ui-bar" data-theme="e" data-tap-toggle="false">
 	<a href="$getLink('sads')" data-transition="slidedown" data-role="button" data-iconpos="left" data-icon="arrow-u">Daily Sads</a>
-	<!-- <a href="$getPostSummaryLink" data-role="button" data-iconpos="right" data-icon="arrow-d">?</a> -->
+	<% if $CurrentMember.Team.CurrentSprint.IsRetroDay %>
+		<a href="retro" data-role="button" data-iconpos="right" data-icon="arrow-d">Retro Time!</a>
+	<% else_if $CurrentMember.Team.CurrentSprint.NextDate %>
+		<a href="$getLink('index', +1)" data-role="button" data-iconpos="right" data-icon="arrow-r">Next Day</a>
+	<% else %>
+		<a href="." data-role="button" data-iconpos="right" data-icon="arrow-d">Done</a>
+	<% end_if %>
 </div>
 <script type="text/javascript">
 	var graphData = [
-		<% loop $CurrentMember.getVertices() %>
-			[$X, $InverseY]<% if not $Last %>,<% end_if %>
+		<% loop $CurrentMember.getGraphDataForSprint() %>
+			[$X, $Y]<% if not $Last %>,<% end_if %>
 		<% end_loop %>
 	];
 	var interactive = false;

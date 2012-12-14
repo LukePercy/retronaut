@@ -38,10 +38,14 @@ class Sprint extends DataObject {
 		return floor($this->getDayIndex() / 5) + 1;
 	}
 
+	public function getNumDays() {
+		return $this->getDayIndex($this->Obj('EndDate')) + 1;
+	}
+
 	// Returns the index of the day into the sprint - Tuesday of Week 2 = 7
 	// TODO: remove weekends from calculations
-	public function getDayIndex() {
-		$date = $this->getDate();
+	public function getDayIndex($date = null) {
+		$date = $date ? $date : $this->getDate();
 		$startDate = $this->obj('StartDate');
 
 		$days_between = $date->days_between(
@@ -64,16 +68,16 @@ class Sprint extends DataObject {
 			$date = new SS_DateTime('RequestedDate');
 			$date->setValue($requestedDate);
 			return $date;
-		} else {
-			$date = SS_Datetime::now();
-			$daysIntoWeekend = $date->format('N') - 5;
-			while ($daysIntoWeekend > 0) {
-				$date->setValue($date->day_before($date->format('Y'), $date->format('n'), $date->format('j')));
-				$daysIntoWeekend--;
-			}
-
-			return $date;
 		}
+
+		$date = SS_Datetime::now();
+		$daysIntoWeekend = $date->format('N') - 5;
+		while ($daysIntoWeekend > 0) {
+			$date->setValue($date->day_before($date->format('Y'), $date->format('n'), $date->format('j')));
+			$daysIntoWeekend--;
+		}
+
+		return $date;
 	}
 
 	public function getPreviousDate() {
@@ -94,7 +98,7 @@ class Sprint extends DataObject {
 		// If, after we skipped the weekend, we've shot past the start of sprint, then return.
 		if ($previousDate->format('Y') < $startDate->format('Y') ||
 			$previousDate->format('n') < $startDate->format('n') ||
-			$previousDate->format('j') <= $startDate->format('j')) {
+			$previousDate->format('j') < $startDate->format('j')) {
 			return;
 		}
 
@@ -127,10 +131,21 @@ class Sprint extends DataObject {
 		}
 		if ($nextDate->format('Y') > $endDate->format('Y') ||
 			$nextDate->format('n') > $endDate->format('n') ||
-			$nextDate->format('j') >= $endDate->format('j')) {
+			$nextDate->format('j') > $endDate->format('j')) {
 			return;
 		}
 
 		return $nextDate;
+	}
+
+	public function IsRetroDay() {
+		// Only the current day can be retrospective day.
+		if (!$this->getDate()->isToday())
+		{
+			return false;
+		}
+
+		// Only on the last day of the sprint.
+		return $this->getDayIndex() == ($this->getNumDays() - 1);
 	}
 }
