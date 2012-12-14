@@ -9,3 +9,4 @@ Director:
         'retro/$Action/$ID/$Name': 'RetroController'
         'tags/$Action/$ID/$Name': 'TagController'
         'vertices/$Action/$ID/$Name': 'VertexController'
+        'votes/$Action/$ID/$Name': 'VoteController'

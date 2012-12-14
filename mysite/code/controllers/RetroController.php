@@ -15,13 +15,14 @@ class RetroController extends SecureController {
 		Requirements::themedCSS('jquery.mobile-1.2.0.min');
 		Requirements::themedCSS('jquery-mobile-local');
 		Requirements::themedCSS('graph');
+		Requirements::themedCSS('voting');
 		Requirements::javascript($this->ThemeDir() . '/js/jquery-1.8.2.min.js');
 		Requirements::javascript($this->ThemeDir() . '/js/jquery.flot.js');
 		Requirements::javascript($this->ThemeDir() . '/js/jquery.flot.resize.js');
 		Requirements::javascript($this->ThemeDir() . '/js/page.js');
 		Requirements::javascript($this->ThemeDir() . '/js/jquery.mobile-1.2.0.min.js');
 		Requirements::javascript($this->ThemeDir() . '/js/graph.js');
-		Requirements::javascript($this->ThemeDir() . '/js/taglist.js');
+		Requirements::javascript($this->ThemeDir() . '/js/voting.js');
 	}
 
 	public function trends() {
@@ -52,5 +53,9 @@ class RetroController extends SecureController {
 		if ($team) {
 			return $team->getCurrentSprint();
 		}
+	}
+
+	public function getMaxNumVotes() {
+		return NUM_VOTES;
 	}
 }

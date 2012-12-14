@@ -18,3 +18,5 @@ SSViewer::set_theme('scrumble');
 if(class_exists('SiteTree')) SiteTree::enable_nested_urls();
 
 Object::add_extension('Member', 'TeamMemberRole');
+
+define('NUM_VOTES', 3);

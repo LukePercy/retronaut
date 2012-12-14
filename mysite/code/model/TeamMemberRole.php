@@ -153,4 +153,109 @@ class TeamMemberRole extends DataExtension {
 
 		return true;
 	}
+
+	public function setVotes($categoryID, $sprintID, $numVotes) {
+		$memberID = $this->owner->ID;
+		$vote = DataObject::get_one('VoteMemberRelation',
+			'"MemberID"=' . $memberID . ' AND ' .
+			'"CategoryID"=' . $categoryID . ' AND ' .
+			'"SprintID"=' . $sprintID);
+
+		if ($vote) {
+			$vote->Votes = $numVotes;
+			$vote->write();
+			return true;
+		}
+
+		$vote = new VoteMemberRelation();
+		$vote->MemberID = $memberID;
+		$vote->CategoryID = $categoryID;
+		$vote->SprintID = $sprintID;
+		$vote->Votes = $numVotes;
+		$vote->write();
+
+		return true;
+	}
+
+	public function clearVotes($sprintID) {
+		$memberID = $this->owner->ID;
+		$votes = DataObject::get('VoteMemberRelation',
+			'"MemberID"=' . $memberID . ' AND ' .
+			'"SprintID"=' . $sprintID);
+
+		if ($votes) {
+			foreach ($votes as $vote) {
+				$vote->delete();
+			}
+		}
+
+		return true;
+	}
+
+	public function getNumVotes($categoryID, $sprintID = null) {
+		$memberID = $this->owner->ID;
+		$sprintID = $sprintID ? $sprintID : $this->owner->Team()->getCurrentSprint()->ID;
+
+		$vote = DataObject::get_one('VoteMemberRelation',
+			'"MemberID"=' . $memberID . ' AND ' .
+			'"CategoryID"=' . $categoryID . ' AND ' .
+			'"SprintID"=' . $sprintID);
+
+		if (!$vote) {
+			return 0;
+		}
+
+		return $vote->Votes;
+	}
+
+	public function getNumVotesLeft($sprintID = null) {
+		$memberID = $this->owner->ID;
+		$sprintID = $sprintID ? $sprintID : $this->owner->Team()->getCurrentSprint()->ID;
+
+		$votes = DataObject::get('VoteMemberRelation',
+			'"MemberID"=' . $memberID . ' AND ' .
+			'"SprintID"=' . $sprintID);
+
+		$votesLeft = NUM_VOTES;
+		if ($votes) foreach ($votes as $vote) {
+			$votesLeft -= $vote->Votes;
+		}
+
+		return $votesLeft;
+	}
+
+	public function CommitVotes($sprintID = null) {
+		$memberID = $this->owner->ID;
+		$sprintID = $sprintID ? $sprintID : $this->owner->Team()->getCurrentSprint()->ID;
+
+		$votes = DataObject::get('VoteMemberRelation',
+			'"MemberID"=' . $memberID . ' AND ' .
+			'"SprintID"=' . $sprintID);
+
+		if (!$votes){
+			return false;
+		}
+
+		foreach ($votes as $vote) {
+			$vote->Committed = true;
+			$vote->write();
+		}
+
+		return true;
+	}
+
+	public function VotesCommitted($sprintID = null) {
+		$memberID = $this->owner->ID;
+		$sprintID = $sprintID ? $sprintID : $this->owner->Team()->getCurrentSprint()->ID;
+
+		$vote = DataObject::get_one('VoteMemberRelation',
+			'"MemberID"=' . $memberID . ' AND ' .
+			'"SprintID"=' . $sprintID);
+
+		if (!$vote) {
+			return false;
+		}
+
+		return $vote->Committed;
+	}
 }

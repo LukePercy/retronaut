@@ -1,0 +1,43 @@
+.stage-voting #commit-votes,
+.stage-voting #waiting,
+.stage-voting #next {
+	display: none;
+}
+
+.stage-voted #votes-left,
+.stage-voted #waiting,
+.stage-voted #next {
+	display: none;
+}
+
+.stage-committed #reset-votes,
+.stage-committed #votes-left,
+.stage-committed #commit-votes,
+.stage-committed #next {
+	display: none;
+}
+
+.stage-committed #reset-votes,
+.stage-committed #votes-left,
+.stage-committed #commit-votes,
+.stage-committed #next {
+	display: none;
+}
+
+.stage-ready #reset-votes,
+.stage-ready #votes-left,
+.stage-ready #commit-votes,
+.stage-ready #waiting {
+	display: none;
+}
+
+.ellipsis-container {
+	position: relative;
+}
+	.ellipsis-container .spacer {
+		visibility: hidden;
+	}
+	.ellipsis-container .content {
+		position: absolute;
+		left: 0;
+	}

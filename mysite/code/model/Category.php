@@ -8,4 +8,13 @@ class Category extends DataObject {
 	static $has_many = array(
 		'Tags' => 'Tag'
 	);
+
+	public function getNumVotes() {
+		$member = Member::currentUser();
+		if (!$member) {
+			return false;
+		}
+
+		return $member->getNumVotes($this->ID);
+	}
 }

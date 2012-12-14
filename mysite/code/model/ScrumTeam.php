@@ -17,4 +17,18 @@ class ScrumTeam extends DataObject {
 			return $currentSprints->first();
 		}
 	}
+
+	function AllVotesCommitted($sprintID = null) {
+		if (is_null($sprintID)) {
+			$sprintID = $this->getCurrentSprint()->ID;
+		}
+
+		foreach ($this->Members() as $member) {
+			if (!$member->VotesCommitted($sprintID)) {
+				return false;
+			}
+		}
+
+		return true;
+	}
 }
