@@ -65,7 +65,14 @@ class Sprint extends DataObject {
 			$date->setValue($requestedDate);
 			return $date;
 		} else {
-			return SS_Datetime::now();
+			$date = SS_Datetime::now();
+			$daysIntoWeekend = $date->format('N') - 5;
+			while ($daysIntoWeekend > 0) {
+				$date->setValue($date->day_before($date->format('Y'), $date->format('n'), $date->format('j')));
+				$daysIntoWeekend--;
+			}
+
+			return $date;
 		}
 	}
 
@@ -83,6 +90,13 @@ class Sprint extends DataObject {
 		do {
 			$previousDate->setValue($previousDate->day_before($previousDate->format('Y'), $previousDate->format('n'), $previousDate->format('j')));
 		} while ($previousDate->format('N') >= 6); // Skip past weekends.
+
+		// If, after we skipped the weekend, we've shot past the start of sprint, then return.
+		if ($previousDate->format('Y') < $startDate->format('Y') ||
+			$previousDate->format('n') < $startDate->format('n') ||
+			$previousDate->format('j') <= $startDate->format('j')) {
+			return;
+		}
 
 		return $previousDate;
 	}
@@ -105,6 +119,17 @@ class Sprint extends DataObject {
 		do {
 			$nextDate->setValue($nextDate->next_day($nextDate->format('Y'), $nextDate->format('n'), $nextDate->format('j')));
 		} while ($nextDate->format('N') >= 6); // Skip past weekends.
+
+		// If, after we skipped the weekend, we've shot past the current day or the end of sprint,
+		// then return.
+		if ($nextDate->inFuture()) {
+			return;
+		}
+		if ($nextDate->format('Y') > $endDate->format('Y') ||
+			$nextDate->format('n') > $endDate->format('n') ||
+			$nextDate->format('j') >= $endDate->format('j')) {
+			return;
+		}
 
 		return $nextDate;
 	}
