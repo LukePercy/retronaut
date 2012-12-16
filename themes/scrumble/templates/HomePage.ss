@@ -11,6 +11,9 @@
 		<div data-role="header" data-theme="b">
 			<img src="$ThemeDir/img/Retrologo.png" alt="Low resolution logo" style="margin: auto; display: block;" height="70"/>
 		</div><!-- /siteheader -->
+		<div data-role="header" data-theme="a">
+			<h2>Welcome, Retronaut!</h2>
+		</div><!-- /homeseparatorheader -->
 		<div data-role="content">
 			$Content
 			<a href="diary" data-role="button" data-icon="ui-icon-scrumble-book" data-iconpos="right">Dev Diary</a>
