@@ -221,9 +221,65 @@ class Sprint extends DataObject {
 	}
 
 	/*
-	 * Returns a list of categories that been voted as the most important during this sprint.
+	 * Returns a list of categories that have been voted as the most important during this sprint.
 	**/
 	public function getVotedCategories() {
-		
+		$categoryVotes = array();
+		$tagVotes = array();
+
+		foreach ($this->Team()->Members() as $member) {
+			for ($day = 0;$day < $this->getNumDays(); $day++) {
+				foreach ($member->getTags('Sad', $this->ID, $day) as $tag) {
+					// Record the number of times this tag has been mentioned.
+					if (!array_key_exists($tag->ID, $tagVotes)) {
+						$tagVotes[$tag->ID] = 0;
+					}
+					$tagVotes[$tag->ID]++;
+				}
+			}
+		}
+
+		$votes = VoteMemberRelation::get('VoteMemberRelation',
+			'"SprintID"=' . $this->ID . ' AND ' .
+			'"Committed"=1');
+
+		if (!$votes) {
+			return;
+		}
+
+		foreach ($votes as $vote) {
+			if (!array_key_exists($vote->CategoryID, $categoryVotes)) {
+				$categoryVotes[$vote->CategoryID] = 0;
+			}
+			$categoryVotes[$vote->CategoryID] += $vote->Votes;
+		}
+
+		// Rank the categories and tags by votes.
+		arsort($categoryVotes);
+		arsort($tagVotes);
+
+		// Build the return structure for categories.
+		$categories = array();
+		foreach ($categoryVotes as $categoryID => $votes) {
+			$category = Category::get_by_id('Category', $categoryID);
+			$category->TrendingTags = new ArrayList(array());
+			$categories[] = $category;
+			if (count($categories) >= 3) {
+				break;
+			}
+		}
+
+		// Add the tags
+		foreach ($tagVotes as $tagID => $votes) {
+			$tag = Tag::get_by_id('Tag', $tagID);
+			foreach ($categories as $category) {
+				if ($category->ID == $tag->CategoryID) {
+					$category->TrendingTags->add($tag);
+					break;
+				}
+			}
+		}
+
+		return new ArrayList($categories);
 	}
 }
