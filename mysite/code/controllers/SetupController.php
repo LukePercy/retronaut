@@ -5,7 +5,7 @@ class SetupController extends SecureController {
 	public static $allowed_actions = array(
 		'index',
 		'sprints',
-		'team'
+		'members'
 	);
 
 	public function init() {
@@ -26,12 +26,12 @@ class SetupController extends SecureController {
 		return $this->renderWith(array('SetupController_sprints', 'SetupController', 'Controller'));
 	}
 
-	public function team() {
-		return $this->renderWith(array('SetupController_team', 'SetupController', 'Controller'));
+	public function members() {
+		return $this->renderWith(array('SetupController_members', 'SetupController', 'Controller'));
 	}
 
 	public function getTitle() {
-		return 'Setup';
+		return 'Team';
 	}
 
 	public function getTeam() {

@@ -5,7 +5,7 @@ After: framework/routes#coreroutes
 Director:
     rules:
         'diary/$Action/$ID/$Name': 'DiaryController'
-        'setup/$Action/$ID/$Name': 'SetupController'
+        'team/$Action/$ID/$Name': 'SetupController'
         'retro/$Action/$ID/$Name': 'RetroController'
         'tags/$Action/$ID/$Name': 'TagController'
         'vertices/$Action/$ID/$Name': 'VertexController'

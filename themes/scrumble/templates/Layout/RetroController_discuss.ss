@@ -16,6 +16,7 @@
 		<a href="retro/trends" data-role="button" data-iconpos="right" data-icon="arrow-u">Trends</a>
 	</div>
 	<div class="buttons-right">
-		<a href="retro/actions" data-role="button" data-iconpos="right" data-icon="arrow-d">Actions</a>
+		<!-- <a href="retro/actions" data-role="button" data-iconpos="right" data-icon="arrow-d">Actions</a> -->
+		<a href="." data-role="button" data-iconpos="right" data-icon="arrow-d">Done</a>
 	</div>
 </div>

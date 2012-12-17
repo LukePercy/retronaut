@@ -1,7 +1,6 @@
 <% include SetupHeader %>
 <div data-role="content">
-	<h3>Setup!</h3>
-		<a href="setup/sprints"><div data-role="button" data-position"fixed" data-icon="plus">Sprint</div></a>
-		<p></p>
-		<a href="setup/team"><div data-role="button" data-position"fixed" data-icon="plus">Team</div></a>
+	<h3>Team Information</h3>
+		<a href="team/sprints" data-role="button" data-iconpos="right" data-icon="arrow-r">Sprint</a>
+		<a href="team/members" data-role="button" data-iconpos="right" data-icon="arrow-r">Members</a>
 </div><!-- /content -->
