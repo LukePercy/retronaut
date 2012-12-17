@@ -10,6 +10,8 @@ var plotOffset;
 var plotPosition;
 var extentX = 0;
 
+var maxSmileySize = 136;
+
 var unsavedGraphData = '';
 
 function init() {
@@ -174,8 +176,6 @@ $(function () {
 		if (graphData[0].data.length > 0) {
 			extentX = graphData[0].data[graphData[0].data.length - 1][0];
 		}
-
-		console.log(extentX);
 		
 		graph.resize(function() {
 			diary_onResize();
@@ -197,4 +197,10 @@ function diary_onResize() {
 	// Recalculate the size of the plot for the pointer detection.
 	plotOffset = plot.offset();
 	plotDimensions = {x: plot.width(), y: plot.height()};
+
+	// Resize the smileys so they're not too big.
+	// They should be at most 20% of the smallest dimension.
+	var smallestDimension = Math.min(plot.width(), plot.height());
+	var smileySize = Math.min(maxSmileySize, parseInt(smallestDimension * 0.35));
+	$('#smilies img').css('width', smileySize + 'px').css('height', smileySize + 'px');
 }

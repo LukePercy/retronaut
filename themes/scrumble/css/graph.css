@@ -3,14 +3,30 @@
 	height: 300px;
 }
 
+#smilies,
 #graph,
 #sketchpad {
 	height: 100%;
 	width: 100%;
 }
 
+#graph,
 #sketchpad {
 	position: absolute;
 	top: 0px;
 	left: 0px;
 }
+
+/* These are shown by Javascript once they're moved and resized */
+#smilies img {
+	position: absolute;
+/*	display: none;*/
+}
+	#smilies img.happy {
+		top: 10%;
+		left: 25%;
+	}
+	#smilies img.sad {
+		bottom: 10%;
+		right: 25%;
+	}

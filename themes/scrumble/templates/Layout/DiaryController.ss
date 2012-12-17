@@ -3,6 +3,10 @@
 	<h3>How did I feel today?</h3>
 	<p>Sketch your mood throughout the day on the graph:</p>
 	<div id="mood-graph">
+		<div id="smilies">
+			<img class="happy" src="$ThemeDir/img/glad.png" />
+			<img class="sad" src="$ThemeDir/img/sad.png" />
+		</div>
 		<div id="graph">
 		</div>
 		<canvas id="sketchpad">
