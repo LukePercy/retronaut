@@ -3,6 +3,10 @@
 	<h3>Mood Graph</h3>
 	<p>This was the general mood throughout the sprint:</p>
 	<div id="mood-graph">
+		<div id="smilies">
+			<img class="happy" src="$ThemeDir/img/glad.png" />
+			<img class="sad" src="$ThemeDir/img/sad.png" />
+		</div>
 		<div id="graph">
 		</div>
 		<canvas id="sketchpad">
