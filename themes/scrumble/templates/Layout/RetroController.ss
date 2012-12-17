@@ -20,6 +20,7 @@
 		<% loop $CurrentMember.Team.Members %>
 			{
 				color: "$ColourRGB",
+				label: "$FirstName",
 				data: [
 					<% loop $GraphDataForSprint %>
 						[$X, $Y]<% if not $Last %>,<% end_if %>

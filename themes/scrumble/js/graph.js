@@ -165,7 +165,8 @@ $(function () {
 		// Set up plot
 		var options = {
 			xaxis: { show: false, min: 0, max: 1 },
-			yaxis: { show: false, min: 0, max: 1 }
+			yaxis: { show: false, min: 0, max: 1 },
+			legend: { position: "nw "}
 		};
 
 		plot = $.plot(graph, graphData, options);
