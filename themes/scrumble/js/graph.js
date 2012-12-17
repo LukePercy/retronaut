@@ -171,8 +171,10 @@ $(function () {
 		plot = $.plot(graph, graphData, options);
 		diary_onResize();
 		if (graphData[0].length > 0) {
-			extentX = graphData[0][graphData.length - 1][0];
+			extentX = graphData[0][graphData[0].length - 1][0];
 		}
+
+		console.log(extentX);
 		
 		graph.resize(function() {
 			diary_onResize();
