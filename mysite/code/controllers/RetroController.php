@@ -14,6 +14,7 @@ class RetroController extends SecureController {
 
 		Requirements::themedCSS('jquery.mobile-1.2.0.min');
 		Requirements::themedCSS('jquery-mobile-local');
+		Requirements::themedCSS('retronaut');
 		Requirements::themedCSS('graph');
 		Requirements::themedCSS('voting');
 		Requirements::javascript($this->ThemeDir() . '/js/jquery-1.8.2.min.js');

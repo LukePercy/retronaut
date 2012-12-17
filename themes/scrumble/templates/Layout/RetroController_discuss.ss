@@ -12,6 +12,10 @@
 	<% end_loop %>
 </div><!-- /content -->
 <div data-role="footer" data-position="fixed" class="ui-bar" data-theme="e" data-tap-toggle="false">
-	<a href="retro/trends" data-role="button" data-iconpos="right" data-icon="arrow-u">Trends</a>
-	<a href="retro/actions" data-role="button" data-iconpos="right" data-icon="arrow-d">Actions</a>
+	<div class="buttons-left">
+		<a href="retro/trends" data-role="button" data-iconpos="right" data-icon="arrow-u">Trends</a>
+	</div>
+	<div class="buttons-right">
+		<a href="retro/actions" data-role="button" data-iconpos="right" data-icon="arrow-d">Actions</a>
+	</div>
 </div>

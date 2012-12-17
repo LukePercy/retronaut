@@ -5,6 +5,10 @@
 			<div data-role="button" data-position"fixed" data-icon="plus">Add Actions</div>
 </div><!-- /content -->
 <div data-role="footer" data-position="fixed" class="ui-bar" data-theme="e" data-tap-toggle="false">
-	<a href="retro/discuss" data-role="button" data-iconpos="right" data-icon="arrow-u">Discussion</a>
-	<a href="." data-role="button" data-iconpos="right" data-icon="arrow-d">Finish</a>
+	<div class="buttons-left">
+		<a href="retro/discuss" data-role="button" data-iconpos="right" data-icon="arrow-u">Discussion</a>
+	</div>
+	<div class="buttons-right">
+		<a href="." data-role="button" data-iconpos="right" data-icon="arrow-d">Finish</a>
+	</div>
 </div>

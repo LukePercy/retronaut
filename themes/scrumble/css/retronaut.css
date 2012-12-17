@@ -1,0 +1,15 @@
+.ui-bar a {
+	margin-right: 10px;
+}
+
+.ui-bar .buttons-left a {
+	float: left;
+}
+
+.ui-bar .buttons-right {
+	float: right;
+	margin-right: 18px;
+}
+.ui-bar .buttons-right a {
+	float: right;
+}
