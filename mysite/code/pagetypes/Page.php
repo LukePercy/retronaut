@@ -31,10 +31,13 @@ class Page_Controller extends ContentController {
 	public function init() {
 		parent::init();
 
-		BasicAuth::requireLogin('Retronaut');
+		if (!Member::currentUserID()) {
+			$this->redirect('Security/login?BackURL=' . $this->getRequest()->getVar('url'));
+		}
 
 		Requirements::themedCSS('jquery.mobile-1.2.0.min');
 		Requirements::themedCSS('jquery-mobile-local');
+		Requirements::themedCSS('retronaut');
 		Requirements::javascript($this->ThemeDir() . '/js/jquery-1.8.2.min.js');
 		Requirements::javascript($this->ThemeDir() . '/js/page.js');
 		Requirements::javascript($this->ThemeDir() . '/js/jquery.mobile-1.2.0.min.js');

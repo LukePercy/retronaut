@@ -3,6 +3,10 @@
     margin-left: 10%;
 }
 
+h3 {
+	margin-top: 6px;
+}
+
 .ui-bar a {
 	margin-right: 10px;
 }
