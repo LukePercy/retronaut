@@ -1,6 +1,7 @@
 #mood-graph {
 	position: relative;
 	height: 300px;
+	background: white;
 }
 
 #smilies,

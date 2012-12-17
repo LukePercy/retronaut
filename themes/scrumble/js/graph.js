@@ -168,6 +168,9 @@ $(function () {
 		var options = {
 			xaxis: { show: false, min: 0, max: 1 },
 			yaxis: { show: false, min: 0, max: 1 },
+			grid: {
+				markings: [ { yaxis: { from: 0.5, to: 0.5 }, color: "#a0a0a0" } ]
+			},
 			legend: { position: "nw "}
 		};
 
