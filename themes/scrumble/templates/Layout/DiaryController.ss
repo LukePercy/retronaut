@@ -18,10 +18,13 @@
 <% include DiaryVariables %>
 <script type="text/javascript">
 	var graphData = [
-		[
-			<% loop $CurrentMember.GraphDataForDay %>
-				[$X, $InverseY]<% if not $Last %>,<% end_if %>
-			<% end_loop %>
-		]
+		{
+			color: "$CurrentMember.ColourRGB",
+			data: [
+				<% loop $CurrentMember.GraphDataForDay %>
+					[$X, $InverseY]<% if not $Last %>,<% end_if %>
+				<% end_loop %>
+			]
+		}
 	];
 </script>

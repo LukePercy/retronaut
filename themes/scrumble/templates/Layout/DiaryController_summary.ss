@@ -26,11 +26,14 @@
 </div>
 <script type="text/javascript">
 	var graphData = [
-		[
-			<% loop $CurrentMember.GraphDataForSprint %>
-				[$X, $Y]<% if not $Last %>,<% end_if %>
-			<% end_loop %>
-		]
+		{
+			color: "$CurrentMember.ColourRGB",
+			data: [
+				<% loop $CurrentMember.GraphDataForSprint %>
+					[$X, $Y]<% if not $Last %>,<% end_if %>
+				<% end_loop %>
+			]
+		}
 	];
 	var interactive = false;
 </script>

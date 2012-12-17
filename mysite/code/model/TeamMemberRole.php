@@ -1,9 +1,36 @@
 <?php
 
 class TeamMemberRole extends DataExtension {
+	static $db = array(
+		'Colour' => "Enum('Yellow, Red, Pink, Purple, Green, Blue', 'Yellow')"
+	);
+
 	static $has_one = array(
 		'Team' => 'ScrumTeam'
 	);
+
+	public function getColourRGB() {
+		switch ($this->owner->Colour) {
+			case 'Yellow':
+				return 'rgb(255, 252, 0)';
+
+			case 'Red':
+				return 'rgb(236, 0, 0)';
+
+			case 'Pink':
+				return 'rgb(255, 120, 245)';
+
+			case 'Purple':
+				return 'rgb(178, 8, 221)';
+
+			case 'Green':
+				return 'rgb(30, 213, 56)';
+
+			case 'Blue':
+			default:
+				return 'rgb(30, 37, 187)';
+		}
+	}
 
 	// Custom relation to Member, see TagMemberRelation for more information.
 	public function getTags($type = null, $sprintID = null, $day = null) {

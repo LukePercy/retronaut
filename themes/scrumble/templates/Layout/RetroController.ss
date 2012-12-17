@@ -18,11 +18,14 @@
 <script type="text/javascript">
 	var graphData = [
 		<% loop $CurrentMember.Team.Members %>
-			[
-				<% loop $GraphDataForSprint %>
-					[$X, $Y]<% if not $Last %>,<% end_if %>
-				<% end_loop %>
-			]<% if not $Last %>,<% end_if %>
+			{
+				color: "$ColourRGB",
+				data: [
+					<% loop $GraphDataForSprint %>
+						[$X, $Y]<% if not $Last %>,<% end_if %>
+					<% end_loop %>
+				]
+			}<% if not $Last %>,<% end_if %>
 		<% end_loop %>
 	];
 	var interactive = false;

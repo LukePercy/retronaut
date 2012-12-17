@@ -101,7 +101,7 @@ function showPos() {
 			position.x <= 1 &&
 			position.y <= 1)
 		{
-			graphData[0].push([position.x, 1 - position.y]);
+			graphData[0].data.push([position.x, 1 - position.y]);
 			plot.setData(graphData);
 			plot.draw();
 
@@ -137,7 +137,7 @@ function savePoints() {
 }
 
 function clearPoints() {
-	graphData = [[]];
+	graphData[0].data = [];
 	plot.setData(graphData);
 	plot.draw();
 
@@ -170,8 +170,8 @@ $(function () {
 
 		plot = $.plot(graph, graphData, options);
 		diary_onResize();
-		if (graphData[0].length > 0) {
-			extentX = graphData[0][graphData[0].length - 1][0];
+		if (graphData[0].data.length > 0) {
+			extentX = graphData[0].data[graphData[0].data.length - 1][0];
 		}
 
 		console.log(extentX);
