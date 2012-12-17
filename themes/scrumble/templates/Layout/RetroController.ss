@@ -11,7 +11,9 @@
 	</div>
 </div><!-- /content -->
 <div data-role="footer" data-position="fixed" class="ui-bar" data-theme="e" data-tap-toggle="false">
-	<a href="retro/trends" data-role="button" data-iconpos="right" data-icon="arrow-d">Trends</a>
+	<div class="buttons-right">
+		<a href="retro/trends" data-role="button" data-iconpos="right" data-icon="arrow-d">Trends</a>
+	</div>
 </div>
 <script type="text/javascript">
 	var graphData = [

@@ -31,7 +31,11 @@
 	</div>
 </div><!-- /content -->
 <div data-role="footer" data-position="fixed" class="ui-bar" data-theme="e" data-tap-toggle="false">
-	<a href="$getLink('glads')" data-transition="slidedown" data-role="button" data-iconpos="left" data-icon="arrow-u">Daily Glads</a>
-	<a href="$getLink('summary')" data-role="button" data-iconpos="right" data-icon="arrow-d">Summary</a>
+	<div class="buttons-left">
+		<a href="$getLink('glads')" data-transition="slidedown" data-role="button" data-iconpos="left" data-icon="arrow-u">Daily Glads</a>
+	</div>
+	<div class="buttons-right">
+		<a href="$getLink('summary')" data-role="button" data-iconpos="right" data-icon="arrow-d">Summary</a>
+	</div>
 </div>
 <% include DiaryVariables %>

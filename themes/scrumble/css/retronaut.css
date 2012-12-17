@@ -1,0 +1,20 @@
+.ui-header .ui-title {
+    margin-right: 10%;
+    margin-left: 10%;
+}
+
+.ui-bar a {
+	margin-right: 10px;
+}
+
+.ui-bar .buttons-left a {
+	float: left;
+}
+
+.ui-bar .buttons-right {
+	float: right;
+	margin-right: 18px;
+}
+.ui-bar .buttons-right a {
+	float: right;
+}

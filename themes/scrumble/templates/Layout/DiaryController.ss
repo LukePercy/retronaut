@@ -11,7 +11,9 @@
 	</div>
 </div><!-- /content -->
 <div data-role="footer" data-position="fixed" class="ui-bar" data-theme="e" data-tap-toggle="false">
-	<a href="$getLink('glads')" data-role="button" data-iconpos="right" data-icon="arrow-d">Daily Glads</a>
+	<div class="buttons-right">
+		<a href="$getLink('glads')" data-role="button" data-iconpos="right" data-icon="arrow-d">Daily Glads</a>
+	</div>
 </div>
 <% include DiaryVariables %>
 <script type="text/javascript">
