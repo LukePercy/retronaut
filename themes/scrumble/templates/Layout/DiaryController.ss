@@ -7,6 +7,10 @@
 			<img class="happy" src="$ThemeDir/img/glad.png" />
 			<img class="sad" src="$ThemeDir/img/sad.png" />
 		</div>
+		<div id="text">
+			<p class="left">morning</p>
+			<p class="right">afternoon</p>
+		</div>
 		<div id="graph">
 		</div>
 		<canvas id="sketchpad">
